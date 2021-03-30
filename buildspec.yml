@@ -9,5 +9,5 @@ env:
 phases:
   build:
     commands:
-      - sh build-wrapper.sh $REPO_URL $REPO_BRANCH # These environment variables come from the CFN stack
+      - bash build-wrapper.sh $REPO_URL $REPO_BRANCH # These environment variables come from the CFN stack
       - git log | head -100
