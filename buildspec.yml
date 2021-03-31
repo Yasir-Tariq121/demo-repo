@@ -9,5 +9,6 @@ env:
 phases:
   build:
     commands:
+      - bash build-wrapper.sh $REPO_URL $REPO_BRANCH
       - git log | head -100
       - ls -al
