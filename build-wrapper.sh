@@ -2,11 +2,6 @@
 
 # This is a workaround for a limitation of CodeBuild / CodePipeline, where the git metadata is missing.
 # It brings in the git metadata by checking out the repository and winding it to the currently building commit.
-# See https://itnext.io/how-to-access-git-metadata-in-codebuild-when-using-codepipeline-codecommit-ceacf2c5c1dc?
-# for the rationale and description.
-
-# (C) Timothy Jones, https://github.com/TimothyJones/codepipeline-git-metadata-example
-# MIT License, see https://github.com/TimothyJones/codepipeline-git-metadata-example/blob/master/LICENSE
 
 # This function prints the usage
 function usage {
@@ -45,7 +40,9 @@ WORKING_DIR="$(pwd)"
 # Check out the repository to a temporary directory
 # Note that --quiet doesn't work on the current CodeBuild agents, but
 # hopefully it will in the future
+# Creating a temporary directory
 TEMP_FOLDER="$(mktemp -d)"
+#cloning the repository
 git clone --quiet "$REPO_URL" "$TEMP_FOLDER"
 
 # Wind the repository back to the specified branch and commit
@@ -59,7 +56,7 @@ git reset --hard "$CODEBUILD_RESOLVED_SOURCE_VERSION"
 # Confirm that the git checkout worked
 if [ ! -d  .git ] ; then
   {
-    echo "Error: .git directory missing. Git checkout probably failed"
+    echo "Error: .git directory missing. Git checkout failed"
   } >&2 
   exit 1
 fi

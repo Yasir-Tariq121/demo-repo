@@ -4,7 +4,7 @@ env:
   variables:
     REPO_URL: https://github.com/Yasir-Tariq121/demo-repo.git
     REPO_BRANCH: main
-  git-credential-helper: yes
+  # git-credential-helper: yes
 
 phases:
   build:
