@@ -19,7 +19,7 @@ if [ "$#" -lt 1 ]; then
   exit 1
 fi
 
-# Confirm that CODEBUILD_RESOLVED_SOURCE_VERSION is set
+# Confirm that CODEBUILD_RESOLVED_SOURCE_VERSION is set (Commit ID)
 if [ -z "${CODEBUILD_RESOLVED_SOURCE_VERSION:-}" ]; then
   {
     echo "Error: CODEBUILD_RESOLVED_SOURCE_VERSION is not set"
