@@ -15,14 +15,15 @@ jobs:
             cdk --version
             pip install -r requirements.txt
       - run:
-          name: Set Virtual ENV
+          name: Set Virtual ENV and run Pip requirements
           command: |
             python -m venv .venv
             source .venv/bin/activate
-      - run:
-          name: Install Pip Requirements
-          command: |
             pip install -r requirements.txt
+      # - run:
+      #     name: Install Pip Requirements
+      #     command: |
+      #       pip install -r requirements.txt
       # - run:
       #     name: CDK Synthesize
       #     command: |
