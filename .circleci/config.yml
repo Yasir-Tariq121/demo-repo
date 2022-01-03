@@ -14,6 +14,15 @@ jobs:
             npm install -g aws-cdk@1.118.0
             cdk --version
             pip install -r requirements.txt
+      - run:
+          name: Set Virtual ENV
+          command: |
+            python -m venv .venv
+            source .venv/bin/activate
+      - run:
+          name: Install Pip Requirements
+          command: |
+            pip install -r requirements.txt
       # - run:
       #     name: CDK Synthesize
       #     command: |
