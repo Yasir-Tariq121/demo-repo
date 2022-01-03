@@ -39,6 +39,7 @@ workflows:
       - hold:
           type: approval
       - Run-CDK:
+          requires: hold
           filters:
             branches:
               only: main
