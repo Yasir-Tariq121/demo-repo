@@ -1,4 +1,7 @@
 version: 2.1
+parameters:
+  CDK_ENV:
+    type: string
 jobs:
   Run-CDK:
     docker:
@@ -21,7 +24,7 @@ jobs:
             source .venv/bin/activate
             pip install -r requirements.txt
             echo printing........
-            echo $CDK_ENV
+            echo << pipeline.parameters.CDK_ENV >>
       # - run:
       #     name: Install Pip Requirements
       #     command: |
@@ -44,7 +47,7 @@ workflows:
           filters:
             branches:
               only: main
-          context: test
+          # context: test
       # - Deployment:
       #     requires:
       #       - Build-and-Push-Stage
