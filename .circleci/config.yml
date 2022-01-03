@@ -13,6 +13,12 @@ jobs:
           command: |
             npm install -g aws-cdk@1.118.0
             cdk --version
+            pip install -r requirements.txt
+      # - run:
+      #     name: CDK Synthesize
+      #     command: |
+      #       npm install -g aws-cdk@1.118.0
+      #       cdk --version
 
 workflows: 
   version: 2
