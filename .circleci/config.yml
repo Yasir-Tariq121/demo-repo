@@ -3,6 +3,7 @@ jobs:
   Run-CDK:
     docker:
       - image: nikolaik/python-nodejs:python3.8-nodejs12-alpine
+    resource_class: medium
     steps:
       - checkout
       - setup_remote_docker:
