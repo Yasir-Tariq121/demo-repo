@@ -41,6 +41,7 @@ workflows:
             branches:
               only: main
           context: test
+          type: approval
       # - Deployment:
       #     requires:
       #       - Build-and-Push-Stage
