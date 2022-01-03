@@ -15,11 +15,13 @@ jobs:
             cdk --version
             pip install -r requirements.txt
       - run:
-          name: Set Virtual ENV and run Pip requirements
+          name: Set Virtual ENV and run CDK
           command: |
             python -m venv .venv
             source .venv/bin/activate
             pip install -r requirements.txt
+            echo printing........
+            echo $CDK_ENV
       # - run:
       #     name: Install Pip Requirements
       #     command: |
@@ -38,7 +40,7 @@ workflows:
           filters:
             branches:
               only: main
-          # context: stage
+          context: test
       # - Deployment:
       #     requires:
       #       - Build-and-Push-Stage
