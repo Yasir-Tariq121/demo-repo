@@ -36,12 +36,13 @@ workflows:
   version: 2
   run_cdk:
     jobs:
+      - hold:
+          type: approval
       - Run-CDK:
           filters:
             branches:
               only: main
           context: test
-          type: approval
       # - Deployment:
       #     requires:
       #       - Build-and-Push-Stage
