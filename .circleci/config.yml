@@ -167,9 +167,11 @@ jobs:
             node --version
             npm -v
             pip3 --version
+            npm install -g cdk@1.118.0
             pip3 install virtualenv
             virtualenv .venv
             source .venv/bin/activate
+            cdk --version
             # sudo apt-get update -y
             # sudo apt-get install python3 -y
             # sudo apt-get install python3-pip -y
