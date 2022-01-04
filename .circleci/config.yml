@@ -167,6 +167,8 @@ jobs:
             node --version
             npm -v
             pip3 --version
+            pip3 install virtualenv
+            source .venv/bin/activate
             # sudo apt-get update -y
             # sudo apt-get install python3 -y
             # sudo apt-get install python3-pip -y
