@@ -164,11 +164,9 @@ jobs:
           name: Install dependencies
           command: |
             npm install -g cdk@1.118.0
-            # pip3 install virtualenv
-            # virtualenv .venv
-            # source .venv/bin/activate
-            pip3 install -r requirements.txt
-            cdk synth -c environment=finexio-dev << pipeline.parameters.stack >>
+            pip3 install virtualenv
+            virtualenv .venv
+            source .venv/bin/activate && pip3 install -r requirements.txt && cdk synth -c environment=finexio-dev << pipeline.parameters.stack >>
       # - run:
       #     name: Set Virtual ENV and run CDK
       #     # working_directory: /root/project/
