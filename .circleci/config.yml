@@ -164,10 +164,10 @@ jobs:
           name: Install dependencies
           command: |
             npm install -g cdk@1.118.0
-            pip3 install virtualenv
-            virtualenv .venv
-            source .venv/bin/activate
-            pip install -r requirements.txt
+            # pip3 install virtualenv
+            # virtualenv .venv
+            # source .venv/bin/activate
+            pip3 install -r requirements.txt
             # sudo apt-get update -y
             # sudo apt-get install python3 -y
             # sudo apt-get install python3-pip -y
