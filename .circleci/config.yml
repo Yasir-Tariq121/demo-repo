@@ -163,7 +163,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            python --version
+            python3 --version
             # sudo apt-get update -y
             # sudo apt-get install python3 -y
             # sudo apt-get install python3-pip -y
