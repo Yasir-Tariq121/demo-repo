@@ -1,58 +1,203 @@
+# version: 2.1
+# parameters:
+#   environment:
+#     type: string
+#     default: test-env # from circleci context
+#   stack:
+#     type: string
+#     default: test-stack
+# jobs:
+#   # Run-CDK:
+#   #   machine:
+#   #     image: ubuntu-2004:202104-01
+#   #   steps:
+#   #     - checkout
+#   #     - run:
+#   #         name: Install dependencies
+#   #         command: |
+#   #           sudo apt-get update -y
+#   #           sudo apt-get install python3 -y
+#   #           sudo apt-get install python3-pip -y
+#   #           sudo npm install -g npm
+#   #           sudo npm install -g aws-cdk@1.118.0
+#   #           sudo cdk --version
+#   #     - run:
+#   #         name: Set Virtual ENV and run CDK
+#   #         # working_directory: /root/project/
+#   #         command: |
+#   #           virtualenv .venv
+#   #           source .venv/bin/activate
+#   #           pip --version
+#   #           pip install -r requirements.txt
+#   #           echo Synthesizing CloudFormation template....
+#   #           cdk synth -c environment=$CDK_ENV << pipeline.parameters.stack >>
+#   #           echo Deploying Stack....
+      
+#   # Run-CDK:
+#   #   docker:
+#   #     - image: nikolaik/python-nodejs:python3.8-nodejs12-alpine
+#   #   resource_class: medium
+#   #   steps:
+#   #     - checkout
+#   #     - setup_remote_docker:
+#   #         version: 18.09.3
+#   #     - run:
+#   #         name: PWD
+#   #         command: |
+#   #           echo location....
+#   #           pwd
+#   #           ls -al
+#   #     # - run:
+#   #     #     name: Install dependencies
+#   #     #     command: |
+#   #     #       npm install -g aws-cdk@1.118.0
+#   #     #       cdk --version
+#   #     # - run:
+#   #     #     name: Set Virtual ENV and run CDK
+#   #     #     # working_directory: /root/project/
+#   #     #     command: |
+#   #     #       python -m venv .venv
+#   #     #       source .venv/bin/activate
+#   #     #       pip install -r requirements.txt
+#   #     #       echo Synthesizing CloudFormation template....
+#   #     #       cdk synth -c environment=<< pipeline.parameters.environment >> << pipeline.parameters.stack >>
+#   #     #       echo Deploying Stack....
+
+# workflows: 
+#   version: 2
+#   run_cdk_dev:
+#     jobs:
+#       - hold:
+#           type: approval
+#       - Run-CDK:
+#           requires: 
+#             - hold
+#           filters:
+#             branches:
+#               only: circleci/cdk
+#           context: dev
+
+
+
 version: 2.1
 parameters:
-  CDK_ENV:
+  environment:
     type: string
-    default: yasir-test
-jobs:
-  Run-CDK:
+    default: test-env # from circleci context
+  stack:
+    type: string
+    default: elastic_ips
+executors:
+  docker-executor:
     docker:
-      - image: nikolaik/python-nodejs:python3.8-nodejs12-alpine
-    resource_class: medium
+      - image: circleci/python:3.9.7-node
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+
+# commands:
+#   restore:
+#     steps:
+#       - restore_cache:
+#           key: Finexio-CDK-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+#       - restore_cache:
+#           key: Finexio-CDK-{{ .Branch }}-{{ checksum "package-lock.json" }}
+#   save:
+#     steps:
+#       - save_cache:
+#           paths:
+#             - "/home/circleci/project/.venv"
+#           key: Finexio-CDK-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+#       - save_cache:
+#           paths:
+#             - "node_modules"
+#           key: Finexio-CDK-{{ .Branch }}-{{ checksum "package-lock.json" }}
+
+jobs:
+  # setup:
+  #   executor: docker-executor
+  #   steps:
+  #     - checkout
+  #     # - restore
+  #     - run:
+  #         name: install
+  #         command: |
+  #           sudo pip install pipenv
+  #           sudo pipenv install
+  #           sudo npm install -g cdk@1.118.0
+  #     # - save
+
+  deploy:
+    executor: docker-executor
     steps:
       - checkout
+      # - restore
       - setup_remote_docker:
           version: 18.09.3
       - run:
+          name: deploy
+          command: |
+            echo present working directory
+            pwd
+            sudo pip install virtualenv
+            # sudo pipenv install
+            virtualenv .venv
+            echo after present working directory
+            pwd
+            ls -al
+            sudo npm install -g cdk@1.118.0
+            source .venv/bin/activate
+            sudo pip install -r requirements.txt
+            python --version
+            # aws --version
+            npm --version
+            node --version
+            npx cdk --version
+            echo << pipeline.parameters.environment >>
+            npx cdk synth -c environment=$CDK_ENV << pipeline.parameters.environment >>
+            # npx cdk list -c environment=$CDK_ENV
+  Run-CDK:
+    machine:
+      image: ubuntu-2004:202104-01
+    steps:
+      - checkout
+      - run:
           name: Install dependencies
           command: |
-            npm install -g aws-cdk@1.118.0
-            cdk --version
-            pip install -r requirements.txt
-      - run:
-          name: Set Virtual ENV and run CDK
-          command: |
-            python -m venv .venv
-            source .venv/bin/activate
-            pip install -r requirements.txt
-            echo printing........
-            echo << pipeline.parameters.CDK_ENV >>
+            python --version
+            # sudo apt-get update -y
+            # sudo apt-get install python3 -y
+            # sudo apt-get install python3-pip -y
+            # sudo npm install -g npm
+            # sudo npm install -g aws-cdk@1.118.0
+            # sudo cdk --version
       # - run:
-      #     name: Install Pip Requirements
+      #     name: Set Virtual ENV and run CDK
+      #     # working_directory: /root/project/
       #     command: |
+      #       virtualenv .venv
+      #       source .venv/bin/activate
+      #       pip --version
       #       pip install -r requirements.txt
-      # - run:
-      #     name: CDK Synthesize
-      #     command: |
-      #       npm install -g aws-cdk@1.118.0
-      #       cdk --version
-
+      #       echo Synthesizing CloudFormation template....
+      #       cdk synth -c environment=$CDK_ENV << pipeline.parameters.stack >>
+      #       echo Deploying Stack....
 workflows: 
   version: 2
-  run_cdk:
+  run_cdk_dev:
     jobs:
-      - hold:
-          type: approval
-      - Run-CDK:
-          requires: 
-            - hold
-          filters:
-            branches:
-              only: main
-          # context: test
-      # - Deployment:
-      #     requires:
-      #       - Build-and-Push-Stage
+      # - hold:
+      #     type: approval
+      # - setup:
+      #     # requires: 
+      #     #   - hold
       #     filters:
       #       branches:
-      #         only: master
-      #     context: stage
+      #         only: circleci/cdk
+      #     context: dev
+      - Run-CDK:
+          # requires: 
+          #   - setup
+          filters:
+            branches:
+              only: circleci/cdk
+          context: dev
