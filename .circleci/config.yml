@@ -168,12 +168,7 @@ jobs:
             # virtualenv .venv
             # source .venv/bin/activate
             pip3 install -r requirements.txt
-            # sudo apt-get update -y
-            # sudo apt-get install python3 -y
-            # sudo apt-get install python3-pip -y
-            # sudo npm install -g npm
-            # sudo npm install -g aws-cdk@1.118.0
-            # sudo cdk --version
+            cdk synth -c environment=finexio-dev << pipeline.parameters.stack >>
       # - run:
       #     name: Set Virtual ENV and run CDK
       #     # working_directory: /root/project/
