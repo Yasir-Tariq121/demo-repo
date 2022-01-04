@@ -199,5 +199,5 @@ workflows:
           #   - setup
           filters:
             branches:
-              only: circleci/cdk
+              only: main
           context: dev
