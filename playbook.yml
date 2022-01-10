@@ -1,5 +1,5 @@
 - name: Validate Services
-  hosts: all
+  hosts: [localhost]
 
   tasks:
     - name: Check connection to google
