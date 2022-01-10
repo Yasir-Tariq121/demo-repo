@@ -1,4 +1,4 @@
-- name: Validate Services
+- name: Check Connection
   hosts: [localhost]
 
   tasks:
