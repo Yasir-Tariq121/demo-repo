@@ -6,7 +6,7 @@
       uri:
         url: "{{ url }}"
         method: GET
-      register: _result_jenkins
-      until: _result_jenkins.status == 200
+      register: _result
+      until: _result.status == 200
       retries: 720 # 720 * 5 seconds = 1hour (60*60/5)
       delay: 5 # Every 5 seconds
