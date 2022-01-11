@@ -2,7 +2,7 @@
   hosts: [localhost]
 
   tasks:
-    - name: Check connection to google
+    - name: To Check connection
       uri:
         url: "{{ url }}"
         method: GET
