@@ -2,7 +2,7 @@
   hosts: [localhost]
 
   tasks:
-    - name: To Check connection..
+    - name: To Check connection...
       uri:
         url: "{{ url }}"
         method: GET
