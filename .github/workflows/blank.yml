@@ -11,7 +11,7 @@ jobs:
       - name: Load .env file
         uses: xom9ikk/dotenv@v1.0.2
         with:
-          path: ./.github/workflows/.env
+          path: ./.github/workflows/
       - name: Failing GH check to block PR merge
         if: ${{ env.deploy_enabled == 'false' }}
         run: exit 1
