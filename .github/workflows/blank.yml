@@ -39,4 +39,4 @@ jobs:
         with:
           push: true
           file: jenkins/images/master/Dockerfile
-          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yasir-test:main-${{ env.GITHUB_SHA }}
+          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yasir-test:main-$GITHUB_SHA
