@@ -5,7 +5,7 @@ on:
     branches:
       - 'main'
 env:
-  COMMIT_ID: ${{ GITHUB_SHA }}
+  COMMIT_ID: $GITHUB_SHA
 jobs:
   docker:
     runs-on: ubuntu-latest
