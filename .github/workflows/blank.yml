@@ -7,6 +7,8 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    env:
+      COMMIT_ID : ${{ github.sha }}
     steps:
       -
         name: Set up Docker Buildx
@@ -32,16 +34,10 @@ jobs:
         name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-      - 
-        name: SET IMAGE TAG
-        id: tag
-        run: |
-          COMMIT_ID=$(git rev-parse --short HEAD)
-          export $COMMIT_ID
       -
         name: Build and push
         uses: docker/build-push-action@v2
         with:
           push: true
           file: jenkins/images/master/Dockerfile
-          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yasir-test:main-$COMMIT_ID
+          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yasir-test:main-${{ env.COMMIT_ID }}
