@@ -7,8 +7,8 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-    env:
-      COMMIT_ID : ${{ github.sha }}
+    # env:
+    #   COMMIT_ID : ${{ github.sha }}
     steps:
       -
         name: Set up Docker Buildx
@@ -40,4 +40,4 @@ jobs:
         with:
           push: true
           file: jenkins/images/master/Dockerfile
-          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yasir-test:main-${{ env.COMMIT_ID }}
+          tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yasir-test:main-${{ github.sha }}
