@@ -39,5 +39,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          file: jenkins/images/master/Dockerfile
+          file: docker/images/master/Dockerfile
           tags: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/yasir-test:main-${{ github.sha }}
