@@ -7,8 +7,6 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-    # env:
-    #   COMMIT_ID : ${{ github.sha }}
     steps:
       -
         name: Set up Docker Buildx
