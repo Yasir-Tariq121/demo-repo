@@ -11,13 +11,13 @@ jobs:
     machine:
       image: ubuntu-2004:202104-01
     environment:
-      API_TOKEN: 97cf7fd39627cc8780c0d43913ffcfbbe2e4d270
+      API_TOKEN: 9b58a27ee1f6614e6b8a018fbec8f8cc91a5b385
     steps:
       - checkout
       - run:
           name: test step
           command: |
-            echos test step
+            echo test step
       
 workflows:
   build:
