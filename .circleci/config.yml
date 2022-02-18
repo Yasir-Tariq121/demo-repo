@@ -10,6 +10,8 @@ jobs:
   bar:
     machine:
       image: ubuntu-2004:202104-01
+    environment:
+      API_TOKEN: 97cf7fd39627cc8780c0d43913ffcfbbe2e4d270
     steps:
       - checkout
       - run:
@@ -21,12 +23,14 @@ workflows:
   build:
     jobs:
       - bar:
-          pre-steps: # steps to run before steps defined in the job bar
-            - run:
-                command: echo "install custom dependency"
           post-steps: # steps to run after steps defined in the job bar
             - run:
-                command: echo "upload artifact to s3"
+              name: Kick off new pipeline
+              command: |
+                curl --location --request POST 'https://circleci.com/api/v2/project/github/Yasir-Tariq121/demo/pipeline' \
+                --header 'Content-Type: application/json' \
+                -u "${API_TOKEN}"
+                echo this is another pipeline trigger step
 # workflows: 
 #   version: 2
 #   run_cdk_dev:
