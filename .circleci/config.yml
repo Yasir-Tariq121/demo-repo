@@ -7,7 +7,7 @@ parameters:
     type: string
     default: test-stack
 jobs:
-  Job1:
+  bar:
     machine:
       image: ubuntu-2004:202104-01
     steps:
@@ -17,16 +17,25 @@ jobs:
           command: |
             echo test step
       
-
-workflows: 
-  version: 2
-  run_cdk_dev:
+workflows:
+  build:
     jobs:
-      - Job1:
-          filters:
-            branches:
-              only: main
-          context: dev
-          post-step:
+      - bar:
+          pre-steps: # steps to run before steps defined in the job bar
             - run:
-                command: echo "this is a post step"
+                command: echo "install custom dependency"
+          post-steps: # steps to run after steps defined in the job bar
+            - run:
+                command: echo "upload artifact to s3"
+# workflows: 
+#   version: 2
+#   run_cdk_dev:
+#     jobs:
+#       - Job1:
+#           filters:
+#             branches:
+#               only: main
+#           context: dev
+#           post-step:
+#             - run:
+#                 command: echo "this is a post step"
