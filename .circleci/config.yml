@@ -29,9 +29,12 @@ workflows:
             - run:
                 name: Kick off new pipeline
                 command: |
-                  curl -d "branch_name=${CIRCLE_BRANCH}" --location --request POST 'https://circleci.com/api/v2/project/github/Yasir-Tariq121/demo/pipeline' \
-                  --header 'Content-Type: application/x-www-form-urlencoded' \
-                  -u "${API_TOKEN}"
+                  curl -u ${API_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+                    "parameters": {
+                      "branch_name": "${CIRCLE_BRANCH}",
+                      "myspecialversion": "4.8.2"
+                    }
+                  }' https://circleci.com/api/v2/project/github/Yasir-Tariq121/demo/pipeline
                   echo this is another pipeline trigger step
 # workflows: 
 #   version: 2
@@ -45,3 +48,7 @@ workflows:
 #           post-step:
 #             - run:
 #                 command: echo "this is a post step"
+
+# curl --location --request POST 'https://circleci.com/api/v2/project/github/Yasir-Tariq121/demo/pipeline' \
+#                   --header 'Content-Type: application/x-www-form-urlencoded' \
+#                   -u "${API_TOKEN}"
