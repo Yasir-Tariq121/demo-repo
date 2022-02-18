@@ -30,7 +30,7 @@ workflows:
                 name: Kick off new pipeline
                 command: |
                   curl -d "branch_name=${CIRCLE_BRANCH}" --location --request POST 'https://circleci.com/api/v2/project/github/Yasir-Tariq121/demo/pipeline' \
-                  --header 'Content-Type: application/json' \
+                  --header 'Content-Type: application/x-www-form-urlencoded' \
                   -u "${API_TOKEN}"
                   echo this is another pipeline trigger step
 # workflows: 
