@@ -25,7 +25,7 @@ workflows:
       - bar:
           post-steps: # steps to run after steps defined in the job bar
             - run:
-                name: Kick off new pipelines
+                name: Kick off new pipeline
                 command: |
                   curl --location --request POST 'https://circleci.com/api/v2/project/github/Yasir-Tariq121/demo/pipeline' \
                   --header 'Content-Type: application/json' \
