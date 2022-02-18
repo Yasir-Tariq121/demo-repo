@@ -10,8 +10,6 @@ jobs:
   bar:
     machine:
       image: ubuntu-2004:202104-01
-    # environment:
-    #   API_TOKEN: 97cf7fd39627cc8780c0d43913ffcfbbe2e4d270
     steps:
       - checkout
       - run:
@@ -31,7 +29,7 @@ workflows:
             - run:
                 name: Kick off new pipeline
                 command: |
-                  curl --location --request POST 'https://circleci.com/api/v2/project/github/Yasir-Tariq121/demo/pipeline' \
+                  curl --location --request POST 'https://circleci.com/api/v2/project/github/Yasir-Tariq121/demo/pipeline', 'branch_name:{{{ .Branch }}' \
                   --header 'Content-Type: application/json' \
                   -u "${API_TOKEN}"
                   echo this is another pipeline trigger step
