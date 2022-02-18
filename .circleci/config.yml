@@ -17,7 +17,7 @@ jobs:
       - run:
           name: test step
           command: |
-            echo test step
+            echos test step
       
 workflows:
   build:
