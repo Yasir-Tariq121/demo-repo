@@ -33,7 +33,7 @@ workflows:
                   curl -u ${API_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
                     "parameters": {
                       "platform_branch": "${CIRCLE_BRANCH}",
-                      "platform_commit": "${COMMIT_ID}",
+                      "platform_commit": "'"$COMMIT_ID"'",
                       "platform_environment": "tests"
                     }
                   }' https://circleci.com/api/v2/project/github/Yasir-Tariq121/demo/pipeline
