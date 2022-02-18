@@ -10,8 +10,8 @@ jobs:
   bar:
     machine:
       image: ubuntu-2004:202104-01
-    environment:
-      API_TOKEN: 9b58a27ee1f6614e6b8a018fbec8f8cc91a5b385
+    # environment:
+    #   API_TOKEN: 97cf7fd39627cc8780c0d43913ffcfbbe2e4d270
     steps:
       - checkout
       - run:
@@ -23,6 +23,10 @@ workflows:
   build:
     jobs:
       - bar:
+          filters:
+            branches:
+              only: main
+          context: dev
           post-steps: # steps to run after steps defined in the job bar
             - run:
                 name: Kick off new pipeline
