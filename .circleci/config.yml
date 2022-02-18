@@ -31,8 +31,9 @@ workflows:
                 command: |
                   curl -u ${API_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
                     "parameters": {
-                      "branch_name": "${CIRCLE_BRANCH}",
-                      "myspecialversion": "4.8.2"
+                      "platform_branch": "${CIRCLE_BRANCH}",
+                      "platform_commit": "${CIRCLE_SHA1}",
+                      "platform_environment": "test"
                     }
                   }' https://circleci.com/api/v2/project/github/Yasir-Tariq121/demo/pipeline
                   echo this is another pipeline trigger step
