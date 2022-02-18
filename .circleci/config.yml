@@ -26,7 +26,7 @@ workflows:
           filters:
             branches:
               only: main
-          context: dev
+          context: test
           post-steps: # steps to run after steps defined in the job bar
             - run:
                 name: Kick off new pipeline
