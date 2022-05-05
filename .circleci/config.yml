@@ -14,8 +14,10 @@ jobs:
       - checkout
       - run:
           name: test step
+          no_output_timeout: 10s
           command: |
             echo test step
+            sleep 30m
       
 workflows:
   build:
@@ -25,19 +27,19 @@ workflows:
             branches:
               only: main
           context: test
-          post-steps: # steps to run after steps defined in the job bar
-            - run:
-                name: Kick off new pipeline
-                command: |
-                  COMMIT_ID=$(git rev-parse --short HEAD)
-                  curl -u ${API_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
-                    "parameters": {
-                      "platform_branch": "${CIRCLE_BRANCH}",
-                      "platform_commit": "'"$COMMIT_ID"'",
-                      "platform_environment": "tests"
-                    }
-                  }' https://circleci.com/api/v2/project/github/Yasir-Tariq121/demo/pipeline
-                  echo this is another pipeline trigger step
+#           post-steps: # steps to run after steps defined in the job bar
+#             - run:
+#                 name: Kick off new pipeline
+#                 command: |
+#                   COMMIT_ID=$(git rev-parse --short HEAD)
+#                   curl -u ${API_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+#                     "parameters": {
+#                       "platform_branch": "${CIRCLE_BRANCH}",
+#                       "platform_commit": "'"$COMMIT_ID"'",
+#                       "platform_environment": "tests"
+#                     }
+#                   }' https://circleci.com/api/v2/project/github/Yasir-Tariq121/demo/pipeline
+#                   echo this is another pipeline trigger step
 # workflows: 
 #   version: 2
 #   run_cdk_dev:
