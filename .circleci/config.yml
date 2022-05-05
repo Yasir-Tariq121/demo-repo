@@ -21,7 +21,7 @@ jobs:
       - run:
           name: commands on fail
           command: echo this is failing......
-          when: on_fail
+          # when: on_fail
       
 workflows:
   build:
