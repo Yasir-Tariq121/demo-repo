@@ -18,6 +18,10 @@ jobs:
           command: |
             echo test step
             sleep 30m
+      - run:
+      name: commands on fail
+      command: echo this is failing......
+      when: on_fail
       
 workflows:
   build:
