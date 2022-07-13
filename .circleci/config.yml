@@ -2,7 +2,7 @@ version: 2.1
 parameters:
   environment:
     type: string
-    default: test-env # from circleci context
+    default: test-env # from circleci context test
   stack:
     type: string
     default: test-stack
