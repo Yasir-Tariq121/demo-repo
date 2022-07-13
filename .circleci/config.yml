@@ -2,7 +2,7 @@ version: 2.1
 parameters:
   environment:
     type: string
-    default: test-env # from circleci context
+    default: test-env # from circleci context test
   stack:
     type: string
     default: test-stack
@@ -31,7 +31,7 @@ workflows:
             branches:
               only: main
           context: test
-#           post-steps: # steps to run after steps defined in the job bar
+#           post-steps: # steps to run after steps defined in the job bar **
 #             - run:
 #                 name: Kick off new pipeline
 #                 command: |
