@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Creating Dummy Artifacts
           command: |
-            echo this is a test
+            echjo this is a test
       - run:
           name: Failed step
           command: echo this is a failed step
