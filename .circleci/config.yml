@@ -11,11 +11,15 @@ jobs:
           name: Creating Dummy Artifacts
           command: |
             echo this is a test
-      - when:
-          condition:
-            on_fail
-          steps:
-            - run: echo this is a failed step
+      - run:
+          name: Failed step
+          command: echo this is a failed step
+          when: on_fail
+#       - when:
+#           condition:
+#             on_fail
+#           steps:
+#             - run: echo this is a failed step
 workflows:
   sample:
     jobs:
