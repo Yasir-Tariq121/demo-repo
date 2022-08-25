@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Creating Dummy Artifacts
           command: |
-            echo this is a test
+            echso this is a test
       - when:
           condition:
             on_fail
