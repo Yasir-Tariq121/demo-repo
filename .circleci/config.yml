@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: docker:18.09.3-git
-    working_directory: /tmp
     steps:
       - checkout
       - setup_remote_docker:
