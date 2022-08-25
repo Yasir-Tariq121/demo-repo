@@ -16,9 +16,7 @@ jobs:
           condition:
             on_fail
           steps:
-            - failure:
-                name: Failure step
-                command: echo this is a failed step
+            - run: echo this is a failed step
 workflows:
   sample:
     jobs:
