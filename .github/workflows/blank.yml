@@ -13,6 +13,7 @@ jobs:
       - name: Install Python 3.10
         run: >
           sudo apt update && sudo apt install python-is-python3 -y
+          python --version
       - name: Setup virtualenv
         run: >
           pip install virtualenv &&
