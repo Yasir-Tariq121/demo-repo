@@ -20,4 +20,4 @@ jobs:
           virtualenv /opt/env/ -ppython3.10
       - name: Python Version
         run: >
-          python version
+          python --version
