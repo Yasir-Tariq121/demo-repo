@@ -2,7 +2,9 @@ name: RunTestsForPR
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - master
 
 jobs:
   Run-Flake8:
