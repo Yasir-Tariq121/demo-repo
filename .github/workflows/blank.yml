@@ -21,3 +21,73 @@ jobs:
       - name: Python Version
         run: >
           python --version
+
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
+# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+
+name: Rails Tests
+
+on:
+  push:
+    branches: [ main ]
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    # If you need DB like PostgreSQL, Redis then define service below.
+    # https://github.com/actions/example-services/tree/master/.github/workflows
+    services:
+      postgres:
+        image: postgres:11.5
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ""
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        # tmpfs makes DB faster by using RAM
+        # options: >-
+        #   --mount type=tmpfs,destination=/var/lib/postgresql/data
+        #   --health-cmd pg_isready
+        #   --health-interval 10s
+        #   --health-timeout 5s
+        #   --health-retries 5
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --entrypoint redis-server
+      datadog:
+        image: datadog/agent:latest
+        ports:
+          - 8126:8126
+
+    env:
+      RAILS_ENV: test
+      PGHOST: localhost
+      PGUSER: postgres
+
+    steps:
+      # - uses: actions/checkout@v2
+      # - name: Set up Ubuntu
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install build-essential libcurl4-openssl-dev libxml2-dev libvips42
+      # - name: Set up Ruby
+      #   uses: ruby/setup-ruby@v1
+      #   with:
+      #     ruby-version: ${{ matrix.ruby-version }}
+      #     bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      # - name: QZTray and Forte dummies
+      #   run: bundle exec rake setup_test_dummies
+      # - name: Create DB
+      #   run: bin/rails db:prepare
+      # - name: Run Brakeman
+      #   run: bundle exec brakeman -w3
+      # - name: Run tests
+      #   run: bundle exec rspec --color --require spec_helper --format progress spec
