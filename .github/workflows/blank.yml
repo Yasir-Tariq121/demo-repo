@@ -1,26 +1,26 @@
-name: RunTestsForPR
+# name: RunTestsForPR
 
-on:
-  push:
-    branches:
-      - main
-      - master
+# on:
+#   push:
+#     branches:
+#       - main
+#       - master
 
-jobs:
-  Run-Flake8:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install Python 3.10
-        run: >
-          sudo apt update && sudo apt install python-is-python3 -y
-          python --version
-      - name: Setup virtualenv
-        run: >
-          pip install virtualenv &&
-          virtualenv /opt/env/ -ppython3.10
-      - name: Python Version
-        run: >
-          python --version
+# jobs:
+#   Run-Flake8:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Install Python 3.10
+#         run: >
+#           sudo apt update && sudo apt install python-is-python3 -y
+#           python --version
+#       - name: Setup virtualenv
+#         run: >
+#           pip install virtualenv &&
+#           virtualenv /opt/env/ -ppython3.10
+#       - name: Python Version
+#         run: >
+#           python --version
 
 
 # This workflow uses actions that are not certified by GitHub.
