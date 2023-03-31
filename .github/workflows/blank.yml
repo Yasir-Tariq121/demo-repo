@@ -72,8 +72,8 @@ jobs:
       PGHOST: localhost
       PGUSER: postgres
 
-    steps:
-      # - uses: actions/checkout@v2
+    # steps:
+    #   # - uses: actions/checkout@v2
       # - name: Set up Ubuntu
       #   run: |
       #     sudo apt-get update
